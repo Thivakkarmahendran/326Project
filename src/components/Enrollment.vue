@@ -1,114 +1,57 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h2>Current Camera</h2>
-                <code v-if="device">{{ device.label }}</code>
-                <div class="border">
-                    <vue-web-cam
-                            ref="webcam"
-                            :device-id="deviceId"
-                            width="100%"
-                            @started="onStarted"
-                            @stopped="onStopped"
-                            @error="onError"
-                            @cameras="onCameras"
-                            @camera-change="onCameraChange"></vue-web-cam>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <select v-model="camera">
-                            <option>-- Select Device --</option>
-                            <option
-                                    v-for="device in devices"
-                                    :key="device.deviceId"
-                                    :value="device.deviceId"
-                            >{{ device.label }}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-primary" @click="onCapture">Capture Photo</button>
-                        <button type="button" class="btn btn-danger" @click="onStop">Stop Camera</button>
-                        <button type="button" class="btn btn-success" @click="onStart">Start Camera</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <h2>Captured Image</h2>
-                <figure class="figure">
-                    <img :src="img" class="img-responsive" />
-                </figure>
-            </div>
-        </div>
+    <div>
+        <h2>Snapshot:</h2>
+        <img :src="snapshotData">
     </div>
 </template>
 
 <script>
     /* eslint-disable no-console */
-
-    import WebCam from "vue-web-cam";
-
     export default {
-        components: {
-            "vue-web-cam": WebCam
-        },
+        name: 'Enrollment',
         data() {
             return {
-                img: null,
-                camera: null,
-                deviceId: null,
-                devices: []
-            };
-        },
-        computed: {
-            device: function() {
-                return this.devices.find(n => n.deviceId === this.deviceId);
-            }
-        },
-        watch: {
-            camera: function(id) {
-                this.deviceId = id;
-            },
-            devices: function() {
-                // Once we have a list select the first one
-                const [first] = this.devices;
-                if (first) {
-                    this.camera = first.deviceId;
-                    this.deviceId = first.deviceId;
-                }
-            }
-        },
-        methods: {
-            onCapture() {
-                this.img = this.$refs.webcam.capture();
-            },
-            onStarted(stream) {
-                console.log("On Started Event", stream);
-            },
-            onStopped(stream) {
-                console.log("On Stopped Event", stream);
-            },
-            onStop() {
-                this.$refs.webcam.stop();
-            },
-            onStart() {
-                this.$refs.webcam.start();
-            },
-            onError(error) {
-                console.log("On Error Event", error);
-            },
-            onCameras(cameras) {
-                this.devices = cameras;
-                console.log("On Cameras Event", cameras);
-            },
-            onCameraChange(deviceId) {
-                this.deviceId = deviceId;
-                this.camera = deviceId;
-                console.log("On Camera Change Event", deviceId);
+                snapshotData: ''
             }
         }
+    }
+
+    var NodeWebcam = require( "node-webcam" );
+
+    //Default options
+
+    var opts = {
+
+        //Picture related
+        width: 1280,
+        height: 720,
+        quality: 100,
+        //Delay in seconds to take shot
+        //if the platform supports miliseconds
+        //use a float (0.1)
+        //Currently only on windows
+        delay: 0,
+        //Save shots in memory
+        saveShots: true,
+        // [jpeg, png] support varies
+        // Webcam.OutputTypes
+        output: "jpeg",
+        //Which camera to use
+        //Use Webcam.list() for results
+        //false for default device
+        device: false,
+        // [location, buffer, base/64]
+        // Webcam.CallbackReturnTypes
+        callbackReturn: "location",
+        //Logging
+        verbose: false
     };
+    NodeWebcam.capture( "test_picture", opts, function( err, data ) {
+
+        this.snapshotData = data;
+
+    });
+
 </script>
 
 <style scoped>
