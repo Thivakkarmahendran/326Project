@@ -1,7 +1,6 @@
 <template>
     <div>
         <video muted id="video" width="100%" height="100%" autoplay></video>
-        <canvas id="frame" width="640" height="480"></canvas>
     </div>
 </template>
 
@@ -24,20 +23,20 @@
     //const { Canvas, Image, ImageData } = canvas
     //faceapi.env.monkeyPatch({ Canvas, Image, ImageData })
 
-    // Promise.all([
-    //     faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
-    //     faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
-    //     faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
-    //     faceapi.nets.faceExpressionNet.loadFromUri('/models')
-    // ]).then(startLiveVideo);
+    Promise.all([
+        faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
+        faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
+        faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
+        faceapi.nets.faceExpressionNet.loadFromUri('/models')
+    ]).then(startLiveVideo);
 
-    loadModels = async () => {
-        const MODEL_URL = "/models";
-        await faceapi.loadSsdMobilenetv1Model(MODEL_URL);
-        await faceapi.loadFaceLandmarkModel(MODEL_URL);
-        await faceapi.loadFaceRecognitionModel(MODEL_URL);
-    };
-    startLiveVideo();
+    // loadModels = async () => {
+    //     const MODEL_URL = "/models";
+    //     await faceapi.loadSsdMobilenetv1Model(MODEL_URL);
+    //     await faceapi.loadFaceLandmarkModel(MODEL_URL);
+    //     await faceapi.loadFaceRecognitionModel(MODEL_URL);
+    // };
+    // startLiveVideo();
 
 
     function startLiveVideo() {
@@ -53,6 +52,8 @@
                 video.onloadedmetadata = function() {
                     video.play();
                 };
+
+                //I DONT LIKE THIS HERE
                 video.addEventListener('play', () => {
                     const canvas = faceapi.createCanvasFromMedia(video);
                     document.body.append(canvas);
