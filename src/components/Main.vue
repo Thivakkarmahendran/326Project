@@ -13,15 +13,11 @@
         name: 'Main',
         mounted: function () {
             this.$nextTick(function () {
-                // Code that will run only after the
-                // entire view has been rendered
-                let video = document.querySelector('video');
-
+                let video = document.querySelector("video");
                 Promise.all([
-                    faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
-                    faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
                     faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
-                    faceapi.nets.faceExpressionNet.loadFromUri('/models')
+                    faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
+                    faceapi.nets.ssdMobilenetv1.loadFromUri('/models')
                 ]).then(startVideo);
 
                 function startVideo() {
@@ -32,18 +28,57 @@
                     )
                 }
 
-                video.addEventListener('play', () => {
-                    var parentDiv = document.getElementById('mainComponent');
-                    const canvas = faceapi.createCanvasFromMedia(video);
-                    parentDiv.append(canvas);
-                    //document.body.append(canvas);
-                    const displaySize = { width: video.offsetWidth, height: video.offsetHeight };
+                video.addEventListener('play', async () => {
+                    let container = document.getElementById("mainComponent");
+                    const labeledFaceDescriptors = await loadLabeledImages();
+                    const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6);
+                    let canvas;
+                    canvas = faceapi.createCanvasFromMedia(video);
+                    container.append(canvas);
+                    const displaySize = {width: video.offsetWidth, height: video.offsetHeight};
                     faceapi.matchDimensions(canvas, displaySize);
                     setInterval(async () => {
-                        //const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions();
+                        const singleResult = await faceapi
+                            .detectSingleFace(video)
+                            .withFaceLandmarks()
+                            .withFaceDescriptor();
 
-                    }, 100)
-                })
+                        if (singleResult) {
+                            const bestMatch = faceMatcher.findBestMatch(singleResult.descriptor);
+                            console.log(bestMatch.toString())
+                        }
+                        if (singleResult) {
+                            const bestMatch = faceMatcher.findBestMatch(singleResult.descriptor);
+                            console.log(bestMatch.toString())
+                        }
+                        // if (detection){
+                        //     const resizedDetection = faceapi.resizeResults(detection, displaySize);
+                        //     const result = faceMatcher.findBestMatch(detection.descriptor);
+                        //     const box = resizedDetection.detection.box;
+                        //     const drawBox = new faceapi.draw.DrawBox(box, {label: result.toString()});
+                        //     drawBox.draw(canvas);
+                        // }
+                    }, 1000);
+                });
+
+                function loadLabeledImages() {
+                    //const labels = ['Andrew_Smith', 'Thivakkar_Mahendran', 'Akhil_Raheja', 'Rishi_Jambunathan']
+                    const labels = ['Andrew_Smith'];
+                    //const labels = ['Black Widow', 'Captain America', 'Captain Marvel', 'Hawkeye', 'Jim Rhodes', 'Thor', 'Tony Stark'];
+                    return Promise.all(
+                        labels.map(async label => {
+                            const descriptions = [];
+                            for (let i = 1; i <= 2; i++) {
+                                const img = await faceapi.fetchImage(`http://s3.amazonaws.com/labeledimage/${label}/${i}.jpg`);
+                                //const img = await faceapi.fetchImage(`https://raw.githubusercontent.com/WebDevSimplified/Face-Recognition-JavaScript/master/labeled_images/${label}/${i}.jpg`)
+                                const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
+                                descriptions.push(detections.descriptor);
+                            }
+
+                            return new faceapi.LabeledFaceDescriptors(label, descriptions);
+                        })
+                    )
+                }
             })
         }
     }
