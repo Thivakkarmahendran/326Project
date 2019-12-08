@@ -60,15 +60,10 @@
                             const resizedDetection = faceapi.resizeResults(singleResult, displaySize);
                             const box = resizedDetection.detection.box;
                             const drawBox = new faceapi.draw.DrawBox(box, {label: bestMatch.toString()});
-                            drawBox.draw(canvas);
+                            faceapi.draw.drawDetections(canvas, resizedDetections);
+                            faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
+                            faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
                         }
-                        // if (detection){
-                        //     const resizedDetection = faceapi.resizeResults(detection, displaySize);
-                        //     const result = faceMatcher.findBestMatch(detection.descriptor);
-                        //     const box = resizedDetection.detection.box;
-                        //     const drawBox = new faceapi.draw.DrawBox(box, {label: result.toString()});
-                        //     drawBox.draw(canvas);
-                        // }
                     }, 1000);
                 });
 
