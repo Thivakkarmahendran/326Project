@@ -42,14 +42,13 @@
                             .detectSingleFace(video)
                             .withFaceLandmarks()
                             .withFaceDescriptor();
-
                         if (singleResult) {
+                            const resizedDetection = faceapi.resizeResults(singleResult, displaySize);
                             const bestMatch = faceMatcher.findBestMatch(singleResult.descriptor);
                             console.log(bestMatch.toString())
-                        }
-                        if (singleResult) {
-                            const bestMatch = faceMatcher.findBestMatch(singleResult.descriptor);
-                            console.log(bestMatch.toString())
+                            const box = resizedDetection.detection.box;
+                            const drawBox = new faceapi.draw.DrawBox(box, {label: bestMatch.toString()});
+                            drawBox.draw(canvas);
                         }
                         // if (detection){
                         //     const resizedDetection = faceapi.resizeResults(detection, displaySize);
