@@ -1,17 +1,17 @@
 <template>
   <div id="app">
 <!--    <img alt="Vue logo" src="./assets/logo.png">-->
-    <Enrollment/>
+    <Main/>
   </div>
 </template>
 
 <script>
-import Enrollment from './components/Enrollment.vue'
+import Main from './components/Main.vue'
 
 export default {
   name: 'app',
   components: {
-    Enrollment
+    Main
   }
 }
 </script>
@@ -24,5 +24,11 @@ export default {
   /*text-align: center;*/
   color: #2c3e50;
   /*margin-top: 0;*/
+}
+body {
+    margin: 0;
+    padding: 0;
+
+
 }
 </style>
