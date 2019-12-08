@@ -62,19 +62,13 @@
                             const drawBox = new faceapi.draw.DrawBox(box, {label: bestMatch.toString()});
                             drawBox.draw(canvas);
                         }
-                        // if (detection){
-                        //     const resizedDetection = faceapi.resizeResults(detection, displaySize);
-                        //     const result = faceMatcher.findBestMatch(detection.descriptor);
-                        //     const box = resizedDetection.detection.box;
-                        //     const drawBox = new faceapi.draw.DrawBox(box, {label: result.toString()});
-                        //     drawBox.draw(canvas);
-                        // }
-                    }, 1000);
+
+                    }, 200);
                 });
 
                 function loadLabeledImages() {
-                    //const labels = ['Andrew_Smith', 'Thivakkar_Mahendran', 'Akhil_Raheja', 'Rishi_Jambunathan']
-                    const labels = ['Andrew_Smith'];
+                    const labels = ['Andrew_Smith', 'Thivakkar_Mahendran', 'Akhil_Raheja', 'Rishi_Jambunathan'];
+                    //const labels = ['Andrew_Smith'];
                     //const labels = ['Black Widow', 'Captain America', 'Captain Marvel', 'Hawkeye', 'Jim Rhodes', 'Thor', 'Tony Stark'];
                     return Promise.all(
                         labels.map(async label => {
@@ -105,7 +99,7 @@
         background: #1abc9c;
         color: white;
         font-size: 12px;
-        z-index:1000;
+        z-index:2;
         position:relative;
     }
 
@@ -115,9 +109,10 @@
         left: 0;
         height:100%;
         width:100%;
-        position: relative;
+        position: absolute;
         overflow: hidden;
-        z-index: 1;
+        z-index: -1;
+
     }
 
     .videoContainer video
@@ -128,8 +123,13 @@
     }
 
     canvas {
+       /*
         position: absolute;
         z-index: 2;
+        */
+        position: absolute;
+        z-index: 1000;
+
     }
 
     * {
