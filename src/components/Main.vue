@@ -1,11 +1,21 @@
 <template>
+
     <div id="mainComponent">
         <!--        Need to figure out full screen-->
         <div class="videoContainer" id="videoContainer">
             <video muted id="video" width="100%" height="auto" autoplay></video>
         </div>
+
+        <div class="header">
+            <h1>326 Project</h1>
+        </div>
+
     </div>
+
 </template>
+
+
+
 
 <script>
     /* eslint-disable no-console */
@@ -146,6 +156,17 @@
 </script>
 
 <style scoped>
+
+    .header {
+        padding: 1px;
+        text-align: center;
+        background: #1abc9c;
+        color: white;
+        font-size: 12px;
+        z-index:1000;
+        position:relative;
+    }
+
     .videoContainer
     {
         top: 0;
@@ -161,5 +182,21 @@
     {
         min-width: 100%;
         min-height: 100%;
+        object-fit: cover;
     }
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    html {
+        min-height: 100%;
+        overflow-y: scroll;
+    }
+    body {
+        min-height: 100%;
+    }
+
+
 </style>
