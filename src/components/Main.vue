@@ -46,9 +46,9 @@
                     setInterval(async () => {
                         if (canvas) canvas.remove();
                         canvas = faceapi.createCanvasFromMedia(video);
-                        container.append(canvas);
                         const displaySize = {width: video.offsetWidth, height: video.offsetHeight};
                         faceapi.matchDimensions(canvas, displaySize);
+                        container.append(canvas);
                         const singleResult = await faceapi
                             .detectSingleFace(video)
                             .withFaceLandmarks()
@@ -60,16 +60,15 @@
                             const resizedDetection = faceapi.resizeResults(singleResult, displaySize);
                             const box = resizedDetection.detection.box;
                             const drawBox = new faceapi.draw.DrawBox(box, {label: bestMatch.toString()});
-                            faceapi.draw.drawDetections(canvas, resizedDetections);
-                            faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
-                            faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
+                            drawBox.draw(canvas);
+                            //faceapi.draw.drawFaceLandmarks(canvas, resizedDetection);
                         }
-                    }, 1000);
+                    }, 5000);
                 });
 
                 function loadLabeledImages() {
-                    //const labels = ['Andrew_Smith', 'Thivakkar_Mahendran', 'Akhil_Raheja', 'Rishi_Jambunathan']
-                    const labels = ['Andrew_Smith'];
+                    const labels = ['Andrew_Smith', 'Thivakkar_Mahendran', 'Akhil_Raheja', 'Rishi_Jambunathan'];
+                    //const labels = ['Andrew_Smith'];
                     //const labels = ['Black Widow', 'Captain America', 'Captain Marvel', 'Hawkeye', 'Jim Rhodes', 'Thor', 'Tony Stark'];
                     return Promise.all(
                         labels.map(async label => {
@@ -100,7 +99,7 @@
         background: #1abc9c;
         color: white;
         font-size: 12px;
-        z-index:1000;
+        z-index:2;
         position:relative;
     }
 
@@ -110,9 +109,10 @@
         left: 0;
         height:100%;
         width:100%;
-        position: relative;
+        position: absolute;
         overflow: hidden;
-        z-index: 1;
+        z-index: -1;
+
     }
 
     .videoContainer video
@@ -123,8 +123,11 @@
     }
 
     canvas {
+        top: 0;
+        left: 0;
         position: absolute;
-        z-index: 2;
+        z-index: 1000;
+
     }
 
     * {
