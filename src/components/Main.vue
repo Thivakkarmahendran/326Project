@@ -74,7 +74,7 @@
                             drawBox.draw(canvas);
                             //faceapi.draw.drawFaceLandmarks(canvas, resizedDetection);
                         }
-                    }, 5000);
+                    }, 200);
                 });
 
                 function loadLabeledImages() {
