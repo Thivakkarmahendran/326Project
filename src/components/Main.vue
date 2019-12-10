@@ -57,6 +57,17 @@
                         if (singleResult) {
                             const bestMatch = faceMatcher.findBestMatch(singleResult.descriptor);
                             console.log(bestMatch.toString());
+
+                            let personName = bestMatch.toString();
+                            personName = personName.replace(/\d+/g, '');
+                            personName = personName.replace("(", '');
+                            personName = personName.replace(")", '');
+                            personName = personName.replace("_", ' ');
+                            personName = "Person Found: " + personName;
+
+                            let title = document.querySelector("h1");
+                            title.innerText = personName;
+
                             const resizedDetection = faceapi.resizeResults(singleResult, displaySize);
                             const box = resizedDetection.detection.box;
                             const drawBox = new faceapi.draw.DrawBox(box, {label: bestMatch.toString()});
