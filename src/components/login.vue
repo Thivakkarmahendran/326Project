@@ -4,8 +4,8 @@
         <input type="text" name="username" v-model="input.username" placeholder="Username" required/>
         <input type="password" name="password" v-model="input.password" placeholder="Password" required/>
         <button type="button" v-on:click="login()">Login</button>
-        <p v-if="invalid">Username/Password is incorrect.</p>
-        <p v-if="!filledout">Username/Password is required.</p>
+        <p v-if="invalid">username/password is incorrect.</p>
+        <p v-if="!filledout">username/password is required.</p>
     </div>
 </template>
 
@@ -62,7 +62,8 @@
         font-size: 12px;
     }
     p {
-        color: red;
+        color: darkred;
         font-size: small;
+        font-weight: bold;
     }
 </style>

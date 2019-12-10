@@ -61,6 +61,7 @@
                             personName = personName.replace(/\d+/g, '');
                             personName = personName.replace("(", '');
                             personName = personName.replace(")", '');
+                            personName = personName.replace(".", '');
                             personName = personName.replace("_", ' ');
                             personName = "Person Found: " + personName;
 
