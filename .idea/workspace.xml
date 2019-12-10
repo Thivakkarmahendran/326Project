@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="976a69d7-ffba-4ba2-99a1-8e68327c43f3" name="Default Changelist" comment="name on header">
-      <change afterPath="$PROJECT_DIR$/src/components/login.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/secure.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/router.js" afterDir="false" />
+    <list default="true" id="976a69d7-ffba-4ba2-99a1-8e68327c43f3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Main.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Main.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,7 +15,6 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Vue Single File Component" />
-        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -28,11 +24,6 @@
     </dirStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="master" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JsFlowSettings">
@@ -132,8 +123,7 @@
       <workItem from="1575525990966" duration="399000" />
       <workItem from="1575569470373" duration="2236000" />
       <workItem from="1575668146439" duration="7454000" />
-      <workItem from="1575955089208" duration="3797000" />
-      <workItem from="1575995834918" duration="288000" />
+      <workItem from="1575955089208" duration="2288000" />
     </task>
     <task id="LOCAL-00001" summary="added header">
       <created>1575844105734</created>
@@ -149,14 +139,7 @@
       <option name="project" value="LOCAL" />
       <updated>1575908138390</updated>
     </task>
-    <task id="LOCAL-00003" summary="name on header">
-      <created>1575957871033</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1575957871033</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,7 +161,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added header" />
     <MESSAGE value="more efficient with placement of box" />
-    <MESSAGE value="name on header" />
-    <option name="LAST_COMMIT_MESSAGE" value="name on header" />
+    <option name="LAST_COMMIT_MESSAGE" value="more efficient with placement of box" />
   </component>
 </project>
