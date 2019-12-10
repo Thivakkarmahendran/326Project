@@ -56,7 +56,6 @@
 
                         if (singleResult) {
                             const bestMatch = faceMatcher.findBestMatch(singleResult.descriptor);
-                            console.log(bestMatch.toString());
 
                             let personName = bestMatch.toString();
                             personName = personName.replace(/\d+/g, '');
@@ -123,6 +122,7 @@
         position: absolute;
         overflow: hidden;
         z-index: -1;
+        object-fit: cover;
 
     }
 
@@ -148,7 +148,7 @@
 
     html {
         min-height: 100%;
-        overflow-y: scroll;
+        /*overflow-y: scroll;*/
     }
     body {
         min-height: 100%;

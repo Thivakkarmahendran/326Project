@@ -2,9 +2,9 @@
     <div id="app">
         <!--    <img alt="Vue logo" src="./assets/logo.png">-->
        <!-- <login/> -->
-        <div id="nav">
-            <router-link v-if="authenticated" to="/login" v-on:click.native="logout()" replace>Logout</router-link>
-        </div>
+<!--        <div id="nav">-->
+<!--            <router-link to="/login" v-on:click.native="logout()" replace>Logout</router-link>-->
+<!--        </div>-->
         <router-view @authenticated="setAuthenticated" />
     </div>
 </template>
@@ -18,7 +18,7 @@
             return {
                 authenticated: false,
                 mockAccount: {
-                    username: "nraboy",
+                    username: "cs326",
                     password: "password"
                 }
             }
