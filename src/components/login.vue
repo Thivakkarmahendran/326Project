@@ -20,8 +20,11 @@
         },
         methods: {
             login() {
+                let password = this.input.password;
+                let hashPassword = this.hashCode(password);
+
                 if(this.input.username != "" && this.input.password != "") {
-                    if(this.input.username == this.$parent.mockAccount.username && this.input.password == this.$parent.mockAccount.password) {
+                    if(this.input.username == this.$parent.mockAccount.username && hashPassword == this.$parent.mockAccount.password) {
                         this.$emit("authenticated", true);
                         this.$router.replace({ name: "secure" });
                     } else {
@@ -30,6 +33,9 @@
                 } else {
                     console.log("A username and password must be present");
                 }
+            },
+            hashCode(s){
+                return s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);
             }
         }
     }

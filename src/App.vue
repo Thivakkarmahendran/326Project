@@ -27,6 +27,9 @@
             //login
         },
         mounted() {
+
+            this.mockAccount.password = this.hashCode("password");
+
             if(!this.authenticated) {
                 this.$router.replace({ name: "login" });
             }
@@ -37,6 +40,9 @@
             },
             logout() {
                 this.authenticated = false;
+            },
+            hashCode(s){
+                return s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);
             }
         }
     }
