@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <!--    <img alt="Vue logo" src="./assets/logo.png">-->
-        <login/>
+       <!-- <login/> -->
         <div id="nav">
             <router-link v-if="authenticated" to="/login" v-on:click.native="logout()" replace>Logout</router-link>
         </div>
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    import login from './components/login.vue'
+    //import login from './components/login.vue'
 
     export default {
         name: 'app',
@@ -24,7 +24,7 @@
             }
         },
         components: {
-            login
+            //login
         },
         mounted() {
             if(!this.authenticated) {

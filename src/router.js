@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import LoginComponent from "./views/login.vue"
-import SecureComponent from "./views/secure.vue"
+import LoginComponent from "./components/login.vue"
+import MainComponent from "./components/Main.vue"
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
     routes: [
@@ -21,7 +21,7 @@ export default new Router({
         {
             path: "/secure",
             name: "secure",
-            component: SecureComponent
+            component: MainComponent
         }
     ]
 })
