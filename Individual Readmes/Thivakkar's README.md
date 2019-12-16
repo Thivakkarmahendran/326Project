@@ -14,3 +14,5 @@ Asset management tool
 Airbnb for college stusdents
 Driver Drowsyness detection to prevent road accidents 
 Finance Management tool
+
+Contribution: Created S3 database to store images, created password hashing, and worked with Andrew on the main facial recoginition screen
