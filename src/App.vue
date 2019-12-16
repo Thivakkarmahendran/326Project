@@ -3,7 +3,7 @@
         <!--    <img alt="Vue logo" src="./assets/logo.png">-->
        <!-- <login/> -->
 <!--        <div id="nav">-->
-<!--            <router-link to="/login" v-on:click.native="logout()" replace>Logout</router-link>-->
+<!--            <router-link v-if="authenticated" to="/login" v-on:click.native="logout()" replace>Logout</router-link>-->
 <!--        </div>-->
         <router-view @authenticated="setAuthenticated" />
     </div>
@@ -18,9 +18,7 @@
             return {
                 authenticated: false,
                 mockAccount: {
-
                     username: "username",
-
                     password: "password"
                 }
             }
@@ -30,7 +28,8 @@
         },
         mounted() {
 
-            this.mockAccount.password = this.hashCode("password");
+            this.mockAccount.password = 1216985755;
+            //console.log(this.hashCode(""));
 
             if(!this.authenticated) {
                 this.$router.replace({ name: "login" });
