@@ -8,9 +8,12 @@ Members:Andrew Smith(https://github.com/Smith1255), Thivakkar Mahendran(https://
 
 3 topic requirments: Database, authorization, Hashing
 
+Contribution: Created login anad authorization page, alert on face identification.
+
 Project ideas:
 Facial recognition and detection web app to help people with Alzheimers identify the people they know..
 Asset management tool
 Airbnb for college stusdents
 Driver Drowsyness detection to prevent road accidents 
 Finance Management tool
+
