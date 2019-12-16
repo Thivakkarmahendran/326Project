@@ -6,7 +6,7 @@ Project Description: Facial recognition web-app for people with Alzheimers. You 
 
 Members:Andrew Smith(https://github.com/Smith1255), Thivakkar Mahendran(https://github.com/Thivakkarmahendran), Rishi
 
-2 topic requirments: Mobile version of the website and Use of database
+3 topic requirments: Database, authorization, Hashing
 
 Project ideas:
 Facial recognition and detection web app to help people with Alzheimers identify the people they know..
